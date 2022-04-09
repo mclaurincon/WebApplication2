@@ -1,0 +1,68 @@
+﻿@model WebApplication2.Models.FilmesViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Criar Novo</a>
+</p>
+<form asp-controller="filmesA" asp-action="Index">
+    <p>
+        Título: <input type= "text" name="texto"/>
+     
+
+      Gêneros<select asp-for="Genero" asp-itens="Model.Generos">
+            <option value=""> Todos</option>
+        </select>
+           <input type="submit" value="Buscar" />
+    </p>
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Filmes[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filmes[0].DataLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filmes[0].Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filmes[0].Preço)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filmes[0].pontos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Filmes) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataLancamento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preço)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
